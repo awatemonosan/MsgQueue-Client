@@ -1,9 +1,9 @@
 'use strict'
 
-const Eventy = require('./eventy');
+const Pidgey = require('pidgey');
 const request = require('request-json');
 
-class MsgQueueClient extends Eventy {
+class MsgQueueClient extends Pidgey {
   constructor(url, interval){
     super();
     this.interval = interval || 500;
