@@ -22,3 +22,4 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 * 0.1.0 Initial release
 * 0.1.2 Added readme, small fixes
+* 0.1.3 Fixed error relating to promises

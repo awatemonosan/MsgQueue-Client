@@ -62,7 +62,7 @@ class MsgQueueClient extends Pidgey {
 
   enqueue(queue, payload){
     var that = this;
-    console.log('sending "' + payload.toString() + '" to "' + queue + '" queue');
+    console.log('enqueuing "' + payload.toString() + '" to "' + queue + '" queue');
     return new Promise(function(resolve, reject){
       that.sendToServer('enqueue', {queue:queue, payload:payload})
       .then(function(){ resolve(); })
@@ -118,8 +118,7 @@ class MsgQueueClient extends Pidgey {
   stop(queue){
     if(this.queues.indexOf(queue)===-1) return;
     this.queues.splice(this.queues.indexOf(queue),1);
-    clearInterval(listenerRef);
   }
-};
+}
 
 module.exports = MsgQueueClient;
