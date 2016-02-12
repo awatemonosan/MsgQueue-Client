@@ -1,0 +1,30 @@
+{
+  "name": "msgqueueclient",
+  "version": "0.1.0",
+  "description": "Client for MsgQueueServer",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "faucet": "0.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awatemonosan/MsgQueueClient.js.git"
+  },
+  "keywords": [
+    "message",
+    "queue"
+  ],
+  "author": "John Winstead <awatemonosan@gmail.com> (johnwinstead.ninja)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/awatemonosan/MsgQueueClient.js/issues"
+  },
+  "homepage": "https://github.com/awatemonosan/MsgQueueClient.js#readme"
+}
