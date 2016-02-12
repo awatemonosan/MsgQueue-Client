@@ -1,6 +1,6 @@
 {
   "name": "msgqueue-client",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Client for MsgQueue-Server",
   "main": "index.js",
   "directories": {
@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "faucet": "0.0.1",
-    "pidgey": "^0.1.0",
+    "pidgey": "^0.1.5",
     "request-json": "^0.5.5"
   },
   "devDependencies": {
