@@ -50,10 +50,10 @@ class MsgQueueClient extends Pidgey {
     return new Promise(function(resolve, reject){
       that.client.post(apiEndpoint, payload, function (err, res, body) {
         if (!err && res.statusCode == 200){
-          console.log(apiEndpoint + ' successful');
+          // console.log(apiEndpoint + ' successful');
           resolve(body);
         } else {
-          console.log(apiEndpoint + ' failed');
+          // console.log(apiEndpoint + ' failed');
           reject(body);
         }
       });
@@ -62,7 +62,7 @@ class MsgQueueClient extends Pidgey {
 
   enqueue(queue, payload){
     var that = this;
-    console.log('enqueuing "' + payload.toString() + '" to "' + queue + '" queue');
+    // console.log('enqueuing "' + payload.toString() + '" to "' + queue + '" queue');
     return new Promise(function(resolve, reject){
       that.sendToServer('enqueue', {queue:queue, payload:payload})
       .then(function(){ resolve(); })
@@ -72,7 +72,7 @@ class MsgQueueClient extends Pidgey {
 
   poll(queue){
     var that = this;
-    console.log('polling for messages in "' + queue + '" queue');
+    // console.log('polling for messages in "' + queue + '" queue');
     return new Promise(function(resolve, reject){
       that.sendToServer('poll', {queue:queue})
       .then(function(body){ resolve(body.count); })
@@ -82,7 +82,7 @@ class MsgQueueClient extends Pidgey {
 
   req(queue, count){
     var that = this;
-    console.log('requesting "' +count+ '" messages from "' + queue + '" queue');
+    // console.log('requesting "' +count+ '" messages from "' + queue + '" queue');
     return new Promise(function(resolve, reject){
       that.sendToServer('req', {queue:queue,count:count})
       .then(function(body){ resolve(body.msgs); })
@@ -92,7 +92,7 @@ class MsgQueueClient extends Pidgey {
 
   ack(id){
     var that = this;
-    console.log('acking message ID "' +id+ '"');
+    // console.log('acking message ID "' +id+ '"');
     return new Promise(function(resolve, reject){
       that.sendToServer('ack', {id:id})
       .then(function(body){ resolve(); })
@@ -102,7 +102,7 @@ class MsgQueueClient extends Pidgey {
 
   rej(id){
     var that = this;
-    console.log('rejecting message ID "' +id+ '"');
+    // console.log('rejecting message ID "' +id+ '"');
     return new Promise(function(resolve, reject){
       that.sendToServer('rej', {id:id})
       .then(function(body){ resolve(); })
