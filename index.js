@@ -110,9 +110,11 @@ class MsgQueueClient extends Pidgey {
     });
   }
 
-  watch(queue){
+  watch(queue, callback){
     if(this.queues.indexOf(queue)!==-1) return;
     this.queues.push(queue);
+    if(callback === undefined) return;
+    this.on(queue, callback);
   }
 
   stop(queue){

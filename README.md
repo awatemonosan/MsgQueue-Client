@@ -24,3 +24,4 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * 0.1.2 Added readme, small fixes
 * 0.1.3 Fixed error relating to promises
 * 0.1.4 Updated to use new version of pidgey
+* 0.1.5 Add optional 2nd argument to .watch
