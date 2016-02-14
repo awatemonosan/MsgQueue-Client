@@ -7,7 +7,7 @@
     "test": "test"
   },
   "dependencies": {
-    "pidgey": "^0.1.9",
+    "pidgey": "^0.1.10",
     "request-json": "^0.5.5"
   },
   "devDependencies": {

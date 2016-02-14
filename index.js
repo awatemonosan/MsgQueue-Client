@@ -5,9 +5,9 @@ const request = require('request-json');
 
 class MsgQueueClient extends Pidgey {
   constructor(url, options){
+    super();
     options = options || {};
     var that = this;
-    super();
     
     this.interval = options.interval || 500;
     this.log = options.log || false;
@@ -43,7 +43,8 @@ class MsgQueueClient extends Pidgey {
               that.ack(msg.id);
             })
             .catch(function(){
-              that.rej(msg.id);
+              that.ack(msg.id);
+              // that.rej(msg.id);
             });
           });
         });
