@@ -10,7 +10,7 @@ class MsgQueueClient extends Pidgey {
     var that = this;
     
     this.interval = options.interval || 500;
-    this.log = options.log || false;
+    this.logLevel = options.logLevel || 0;
 
     this.queues = [];
     this.url = url;
@@ -63,7 +63,6 @@ class MsgQueueClient extends Pidgey {
     };
 
     checkConnectivity();
-
   }
 
   sendToServer(apiEndpoint, payload) {
@@ -71,10 +70,10 @@ class MsgQueueClient extends Pidgey {
     return new Promise(function(resolve, reject){
       that.client.post(apiEndpoint, payload, function (err, res, body) {
         if (!err && res.statusCode == 200){
-          if(that.log === true) console.log(apiEndpoint + ' successful');
+          if(that.logLevel >= 1) console.log(apiEndpoint + ' ' +JSON.stringify(payload)+ ' successful');
           resolve(body);
         } else {
-          if(that.log === true) console.log(apiEndpoint + ' failed');
+          if(that.logLevel >= 1) console.log(apiEndpoint + ' ' +JSON.stringify(payload)+ ' failed');
           reject(body);
         }
       });
@@ -83,7 +82,6 @@ class MsgQueueClient extends Pidgey {
 
   enqueue(queue, payload){
     var that = this;
-    // console.log('enqueuing "' + payload.toString() + '" to "' + queue + '" queue');
     return new Promise(function(resolve, reject){
       that.sendToServer('enqueue', {queue:queue, payload:payload})
       .then(function(){ resolve(); })
@@ -141,6 +139,11 @@ class MsgQueueClient extends Pidgey {
   stop(queue){
     if(this.queues.indexOf(queue)===-1) return;
     this.queues.splice(this.queues.indexOf(queue),1);
+  }
+
+  log(msg){
+    console.log(msg);
+    this.enqueue('log', {msg:msg});
   }
 
   ping(){

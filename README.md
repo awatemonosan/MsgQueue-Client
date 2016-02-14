@@ -35,3 +35,4 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * 0.1.12 Update to use current version of pidgey
 * 0.1.13 Add options as an optional second argument to constructor
 * 0.1.14 Update to use pidgey 0.1.10
+* 0.1.15 Add log method
