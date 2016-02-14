@@ -6,6 +6,7 @@ const request = require('request-json');
 class MsgQueueClient extends Pidgey {
   constructor(url, interval){
     super();
+    
     var that = this;
     this.interval = interval || 500;
     this.queues = [];
@@ -141,8 +142,9 @@ class MsgQueueClient extends Pidgey {
   }
 
   ping(){
+    var that = this;
     return new Promise(function(resolve, reject){
-      this.sendToServer('ping')
+      that.sendToServer('ping')
       .then(resolve).catch(reject);
     });
   }
