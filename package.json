@@ -7,8 +7,7 @@
     "test": "test"
   },
   "dependencies": {
-    "faucet": "0.0.1",
-    "pidgey": "^0.1.5",
+    "pidgey": "^0.1.9",
     "request-json": "^0.5.5"
   },
   "devDependencies": {

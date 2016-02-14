@@ -32,3 +32,4 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * 0.1.9 Added 'connected' event that fires once msgQueue-server is available
 * 0.1.10 Add MsgQueue.log. Set to true to enable debug outputs
 * 0.1.11 Fix bug causing ping to not send
+* 0.1.12 Update to use current version of pidgey
