@@ -9,6 +9,8 @@ A message queue client for MsgQueue-Server
 
 ## Usage
 
+TODO: THIS SECTION
+
 ## Tests
 
   npm test
@@ -26,3 +28,5 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * 0.1.4 Updated to use new version of pidgey
 * 0.1.5 Add optional 2nd argument to .watch
 * 0.1.7 Documented that .watch has been changed to .listen. Debug logs removed
+* 0.1.9 Added Ping method for testing connectivity
+* 0.1.9 Added 'connected' event that fires once msgQueue-server is available

@@ -6,12 +6,12 @@ const request = require('request-json');
 class MsgQueueClient extends Pidgey {
   constructor(url, interval){
     super();
+    var that = this;
     this.interval = interval || 500;
     this.queues = [];
     this.url = url;
     this.client = request.createClient(url);
 
-    var that = this;
     var checkQueue = function(){
       // Poll to see if there are messages
       that.queues.forEach(function(queue){
@@ -34,15 +34,31 @@ class MsgQueueClient extends Pidgey {
         // if there are, then trigger the event system
         .then(function(msgs){
           msgs.forEach(function(msg){
-            that.trigger(queue, msg);
-            that.ack(msg.id);
+            that.trigger(queue, msg)
+            .then(function(){
+              that.ack(msg.id);
+            })
+            .catch(function(){
+              that.rej(msg.id);
+            });
           });
         });
       });
       setTimeout(checkQueue, that.interval);
     };
 
-    checkQueue();
+    var checkConnectivity = function(){
+      that.ping().then(function(){
+        that.trigger('connected');
+        checkQueue();
+      })
+      .catch(function(){
+        setTimeout(checkConnectivity, that.interval);
+      });
+    };
+
+    checkConnectivity();
+
   }
 
   sendToServer(apiEndpoint, payload) {
@@ -110,7 +126,7 @@ class MsgQueueClient extends Pidgey {
     });
   }
 
-  watch(queue, callback){
+  listen(queue, callback){
     if(this.queues.indexOf(queue)!==-1) return;
     this.queues.push(queue);
     if(callback === undefined) return;
@@ -120,6 +136,13 @@ class MsgQueueClient extends Pidgey {
   stop(queue){
     if(this.queues.indexOf(queue)===-1) return;
     this.queues.splice(this.queues.indexOf(queue),1);
+  }
+
+  ping(){
+    return new Promise(function(resolve, reject){
+      this.sendToServer('ping')
+      .then(resolve).catch(reject);
+    });
   }
 }
 
