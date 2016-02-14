@@ -12,6 +12,8 @@ class MsgQueueClient extends Pidgey {
     this.url = url;
     this.client = request.createClient(url);
 
+    this.log = false;
+
     var checkQueue = function(){
       // Poll to see if there are messages
       that.queues.forEach(function(queue){
@@ -66,10 +68,10 @@ class MsgQueueClient extends Pidgey {
     return new Promise(function(resolve, reject){
       that.client.post(apiEndpoint, payload, function (err, res, body) {
         if (!err && res.statusCode == 200){
-          // console.log(apiEndpoint + ' successful');
+          if(that.log === true) console.log(apiEndpoint + ' successful');
           resolve(body);
         } else {
-          // console.log(apiEndpoint + ' failed');
+          if(that.log === true) console.log(apiEndpoint + ' failed');
           reject(body);
         }
       });
