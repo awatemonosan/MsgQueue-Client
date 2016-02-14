@@ -4,16 +4,17 @@ const Pidgey = require('pidgey');
 const request = require('request-json');
 
 class MsgQueueClient extends Pidgey {
-  constructor(url, interval){
+  constructor(url, options){
+    options = options || {};
+    var that = this;
     super();
     
-    var that = this;
-    this.interval = interval || 500;
+    this.interval = options.interval || 500;
+    this.log = options.log || false;
+
     this.queues = [];
     this.url = url;
     this.client = request.createClient(url);
-
-    this.log = false;
 
     var checkQueue = function(){
       // Poll to see if there are messages
