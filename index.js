@@ -83,9 +83,9 @@ class MsgQueueClient extends Pidgey {
   enqueue(queue, payload){
     var that = this;
     return new Promise(function(resolve, reject){
-      that.sendToServer('enqueue', {queue:queue, payload:payload})
-      .then(function(){ resolve(); })
-      .catch(function(){ reject(); });
+      that.sendToServer('enqueue', {queue: queue, payload: payload})
+      .then(function(body){ resolve(); })
+      .catch(function(body){ reject(); });
     });
   }
 
@@ -93,7 +93,17 @@ class MsgQueueClient extends Pidgey {
     var that = this;
     // console.log('polling for messages in "' + queue + '" queue');
     return new Promise(function(resolve, reject){
-      that.sendToServer('poll', {queue:queue})
+      that.sendToServer('poll', {queue: queue})
+      .then(function(body){ resolve(body.count); })
+      .catch(function(body){ reject(); });
+    });
+  }
+
+  check(queue){
+    var that = this;
+    // console.log('counting messages in "' + queue + '" queue');
+    return new Promise(function(resolve, reject){
+      that.sendToServer('check', {queue: queue})
       .then(function(body){ resolve(body.count); })
       .catch(function(body){ reject(); });
     });
@@ -103,7 +113,7 @@ class MsgQueueClient extends Pidgey {
     var that = this;
     // console.log('requesting "' +count+ '" messages from "' + queue + '" queue');
     return new Promise(function(resolve, reject){
-      that.sendToServer('req', {queue:queue,count:count})
+      that.sendToServer('req', {queue: queue, count: count})
       .then(function(body){ resolve(body.msgs); })
       .catch(function(body){ reject(); });
     });
