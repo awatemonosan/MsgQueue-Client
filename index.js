@@ -99,11 +99,11 @@ class MsgQueueClient extends Pidgey {
     });
   }
 
-  check(queue){
+  count(queue){
     var that = this;
     // console.log('counting messages in "' + queue + '" queue');
     return new Promise(function(resolve, reject){
-      that.sendToServer('check', {queue: queue})
+      that.sendToServer('count', {queue: queue})
       .then(function(body){ resolve(body.count); })
       .catch(function(body){ reject(); });
     });
