@@ -43,8 +43,7 @@ class MsgQueueClient extends Pidgey {
               that.ack(msg.id);
             })
             .catch(function(){
-              that.ack(msg.id);
-              // that.rej(msg.id);
+              that.rej(msg.id);
             });
           });
         });
