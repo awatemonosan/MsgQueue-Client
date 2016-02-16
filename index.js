@@ -152,7 +152,8 @@ class MsgQueueClient extends Pidgey {
 
   log(msg){
     console.log(msg);
-    this.enqueue('log', {msg:msg});
+    var time = new Date().getTime();
+    this.enqueue('log', {time: time, msg:'['time']'+msg});
   }
 
   ping(){

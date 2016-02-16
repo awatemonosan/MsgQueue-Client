@@ -39,3 +39,4 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * 0.1.16 Add count method to get number of messages in a queue
 * 0.1.17 Bug fixes
 * 0.1.18 More fixes!
+* 0.1.19 Add timestamps to logs
